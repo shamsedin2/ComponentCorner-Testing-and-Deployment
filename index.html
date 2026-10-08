@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprig — Plant care that remembers for you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>/* ---------- Tokens ---------- */
+:root {
+  --ink: #1F2A20;
+  --fern: #3C5A3E;
+  --fern-dark: #2E4630;
+  --meadow: #8BAA7B;
+  --sunbeam: #E9B94A;
+  --paper: #EFEEDF;
+  --paper-raised: #E5E2CE;
+  --line: #D6D2BC;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+
+  --max-width: 1080px;
+}
+
+/* ---------- Reset-ish basics ---------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--fern-dark);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+
+a {
+  color: var(--fern-dark);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--fern);
+  color: var(--paper);
+}
+
+.button-primary:hover {
+  background: var(--fern-dark);
+}
+
+.button-ghost {
+  background: transparent;
+  border-color: var(--fern);
+  color: var(--fern-dark);
+}
+
+.button-ghost:hover {
+  background: var(--paper-raised);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--fern-dark);
+  text-decoration: none;
+}
+
+.primary-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.primary-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.primary-nav a:hover {
+  border-bottom-color: var(--sunbeam);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle-bar {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.kicker {
+  text-transform: none;
+  color: var(--fern);
+  font-weight: 600;
+  margin-bottom: 0.75em;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  max-width: 14ch;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  max-width: 46ch;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 1.5em;
+}
+
+.hero-art svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- How it works ---------- */
+.how {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+
+.step-list {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.step {
+  background: var(--paper-raised);
+  border-radius: 6px;
+  padding: 28px;
+}
+
+.step-number {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--paper);
+  background: var(--fern);
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+/* ---------- Features ---------- */
+.features {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.feature-row-reverse .feature-text {
+  order: 2;
+}
+
+.feature-img {
+  border-radius: 6px;
+}
+
+.tip-widget {
+  margin-top: 40px;
+  background: var(--fern-dark);
+  color: var(--paper);
+  padding: 32px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.tip-widget h3 {
+  color: var(--paper);
+}
+
+.tip-text {
+  min-height: 3.2em;
+  font-size: 1.05rem;
+}
+
+.tip-widget .button-primary {
+  background: var(--sunbeam);
+  color: var(--ink);
+}
+
+.tip-widget .button-primary:hover {
+  background: #d9a838;
+}
+
+/* ---------- Waitlist ---------- */
+.waitlist {
+  padding-top: 32px;
+  padding-bottom: 80px;
+}
+
+.waitlist-inner {
+  background: var(--paper-raised);
+  border-radius: 8px;
+  padding: 48px;
+  max-width: 640px;
+}
+
+.waitlist-form {
+  margin-top: 24px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-row label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-row input {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--paper);
+}
+
+.form-row input:focus {
+  outline: 2px solid var(--fern);
+  outline-offset: 1px;
+}
+
+.form-status {
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--fern-dark);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 24px;
+    gap: 16px;
+  }
+
+  .primary-nav.is-open {
+    display: flex;
+  }
+
+  .site-header {
+    position: relative;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 40px;
+  }
+
+  .hero-art {
+    order: -1;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .step-list {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-row,
+  .feature-row-reverse .feature-text {
+    grid-template-columns: 1fr;
+    order: 0;
+  }
+
+  .feature-row {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-inner {
+    padding: 28px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a href="#top" class="wordmark">Sprig</a>
+      <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <nav id="primary-nav" class="primary-nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#waitlist">Join the waitlist</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <section class="hero wrap" aria-labelledby="hero-heading">
+      <div class="hero-copy">
+        <p class="kicker">For people who forget to look at the soil</p>
+        <h1 id="hero-heading">Your plants remember when you don't.</h1>
+        <p class="hero-sub">Sprig learns how often each of your plants actually needs water, light, and a little attention — then tells you before it's too late, not after the leaves have already dropped.</p>
+        <div class="hero-actions">
+          <a href="#waitlist" class="button button-primary">Get early access</a>
+          <a href="#how-it-works" class="button button-ghost">See how it works</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="210" cy="420" rx="130" ry="24" fill="#DDD8C4"/>
+          <path d="M150 420 L165 260 Q168 250 178 250 L242 250 Q252 250 255 260 L270 420 Z" fill="#B5652B"/>
+          <path d="M150 420 L165 260 Q168 250 178 250 L210 250 L210 420 Z" fill="#9C5323"/>
+          <path d="M210 270 C 150 260, 90 200, 100 120 C 160 120, 210 170, 210 270 Z" fill="#3C5A3E"/>
+          <path d="M210 270 C 270 260, 330 200, 320 120 C 260 120, 210 170, 210 270 Z" fill="#4C7350"/>
+          <path d="M210 270 C 175 240, 150 170, 185 90 C 225 110, 235 190, 210 270 Z" fill="#8BAA7B"/>
+          <path d="M210 270 C 245 240, 270 170, 235 90 C 195 110, 185 190, 210 270 Z" fill="#6E9268"/>
+          <line x1="210" y1="270" x2="210" y2="120" stroke="#2E4630" stroke-width="3"/>
+        </svg>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="how wrap" aria-labelledby="how-heading">
+      <h2 id="how-heading">Three steps, then Sprig does the remembering</h2>
+      <ol class="step-list">
+        <li class="step">
+          <span class="step-number">1</span>
+          <h3>Add your plant</h3>
+          <p>Snap a photo and tell us where it lives — windowsill, bathroom shelf, dim hallway corner. Sprig identifies the species and its baseline needs.</p>
+        </li>
+        <li class="step">
+          <span class="step-number">2</span>
+          <h3>Get nudged, not nagged</h3>
+          <p>We adjust reminders to your home's light and the season, so you're not watering on a rigid schedule that ignores what's actually happening.</p>
+        </li>
+        <li class="step">
+          <span class="step-number">3</span>
+          <h3>Snap and diagnose</h3>
+          <p>Yellowing leaf? Odd spots? Take a photo and Sprig points you to the most likely cause and what to try first.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="features" class="features wrap" aria-labelledby="features-heading">
+      <h2 id="features-heading">Built around how plants actually fail</h2>
+
+      <article class="feature-row">
+        <div class="feature-text">
+          <h3>Care that adapts to the room, not a spreadsheet</h3>
+          <p>Most care apps give every pothos the same seven-day watering rule. Sprig factors in your specific window direction, the season, and how the plant has responded so far, and quietly adjusts the schedule as it learns.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=900&q=80" alt="Close-up of a monstera leaf with sunlight passing through its natural holes" class="feature-img" loading="lazy">
+      </article>
+
+      <article class="feature-row feature-row-reverse">
+        <div class="feature-text">
+          <h3>A second opinion when something looks off</h3>
+          <p>Overwatering and underwatering look almost identical at first — droopy, dull, unhappy. Sprig asks a few quick questions about what you're seeing and narrows down what's actually going on before you make it worse.</p>
+        </div>
+        <img src="https://images.unsplash.com/photo-1524598171353-e2a01f4b7c22?auto=format&fit=crop&w=900&q=80" alt="Person examining a houseplant leaf closely for signs of damage" class="feature-img" loading="lazy">
+      </article>
+
+      <aside class="tip-widget" aria-labelledby="tip-heading">
+        <h3 id="tip-heading">Need a tip right now?</h3>
+        <p id="tip-text" class="tip-text">Press the button for a care tip picked for whatever's growing near you.</p>
+        <button id="tip-button" type="button" class="button button-primary">Get a care tip</button>
+      </aside>
+    </section>
+
+    <section id="waitlist" class="waitlist wrap" aria-labelledby="waitlist-heading">
+      <div class="waitlist-inner">
+        <h2 id="waitlist-heading">Sprig is opening to a small group first</h2>
+        <p>We're onboarding slowly so the plant identification stays accurate. Leave your email and we'll let you know the day it's your turn.</p>
+
+        <form id="waitlist-form" class="waitlist-form" novalidate>
+          <div class="form-row">
+            <label for="name">First name</label>
+            <input type="text" id="name" name="name" placeholder="Jordan" required>
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="jordan@example.com" required>
+          </div>
+          <button type="submit" class="button button-primary">Join the waitlist</button>
+          <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <p>&copy; <span id="year"></span> Sprig. Made for the plants that deserve better.</p>
+      <nav class="footer-nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#waitlist">Waitlist</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>// ---------- Mobile nav toggle ----------
+const navToggle = document.getElementById('nav-toggle');
+const primaryNav = document.getElementById('primary-nav');
+
+function toggleMobileNav() {
+  const isOpen = primaryNav.classList.toggle('is-open');
+  navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+}
+
+navToggle.addEventListener('click', toggleMobileNav);
+
+// Close the mobile menu once a link is tapped, so it doesn't stay open
+primaryNav.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => {
+    primaryNav.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+// ---------- Care tip generator ----------
+const careTips = [
+  "Check the top inch of soil with your finger before watering — if it's still damp, wait a few more days.",
+  "Rotate your plant a quarter turn every week or two so it grows evenly toward the light.",
+  "Yellow leaves near the bottom are often normal aging. Yellow leaves everywhere usually means overwatering.",
+  "Most houseplants slow down in winter and need noticeably less water than in summer.",
+  "Dusty leaves can't photosynthesize well — wipe them down with a damp cloth every few weeks.",
+  "Brown, crispy leaf edges are often a sign of low humidity, not underwatering.",
+  "Repot when roots start circling the bottom of the pot, usually every 1–2 years for most houseplants."
+];
+
+let lastTipIndex = -1;
+const tipButton = document.getElementById('tip-button');
+const tipText = document.getElementById('tip-text');
+
+function showRandomTip() {
+  let index = Math.floor(Math.random() * careTips.length);
+  // avoid repeating the same tip twice in a row
+  while (index === lastTipIndex && careTips.length > 1) {
+    index = Math.floor(Math.random() * careTips.length);
+  }
+  lastTipIndex = index;
+  tipText.textContent = careTips[index];
+}
+
+tipButton.addEventListener('click', showRandomTip);
+
+// ---------- Waitlist form ----------
+const waitlistForm = document.getElementById('waitlist-form');
+const formStatus = document.getElementById('form-status');
+
+function handleWaitlistSubmit(event) {
+  event.preventDefault();
+
+  const nameValue = document.getElementById('name').value.trim();
+  const emailValue = document.getElementById('email').value.trim();
+
+  if (!nameValue || !emailValue) {
+    formStatus.textContent = 'Please fill in both your name and email.';
+    formStatus.style.color = '#b5652b';
+    return;
+  }
+
+  formStatus.textContent = `Thanks, ${nameValue} — we'll email ${emailValue} as soon as a spot opens up.`;
+  formStatus.style.color = '';
+  waitlistForm.reset();
+}
+
+waitlistForm.addEventListener('submit', handleWaitlistSubmit);
+
+// ---------- Footer year ----------
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

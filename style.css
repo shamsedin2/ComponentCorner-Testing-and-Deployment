@@ -1,0 +1,405 @@
+/* ---------- Tokens ---------- */
+:root {
+  --ink: #1F2A20;
+  --fern: #3C5A3E;
+  --fern-dark: #2E4630;
+  --meadow: #8BAA7B;
+  --sunbeam: #E9B94A;
+  --paper: #EFEEDF;
+  --paper-raised: #E5E2CE;
+  --line: #D6D2BC;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+
+  --max-width: 1080px;
+}
+
+/* ---------- Reset-ish basics ---------- */
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--fern-dark);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+
+a {
+  color: var(--fern-dark);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+}
+
+.button-primary {
+  background: var(--fern);
+  color: var(--paper);
+}
+
+.button-primary:hover {
+  background: var(--fern-dark);
+}
+
+.button-ghost {
+  background: transparent;
+  border-color: var(--fern);
+  color: var(--fern-dark);
+}
+
+.button-ghost:hover {
+  background: var(--paper-raised);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--fern-dark);
+  text-decoration: none;
+}
+
+.primary-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.primary-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 2px;
+}
+
+.primary-nav a:hover {
+  border-bottom-color: var(--sunbeam);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle-bar {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  align-items: center;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+
+.kicker {
+  text-transform: none;
+  color: var(--fern);
+  font-weight: 600;
+  margin-bottom: 0.75em;
+}
+
+.hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  max-width: 14ch;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  max-width: 46ch;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 1.5em;
+}
+
+.hero-art svg {
+  width: 100%;
+  height: auto;
+}
+
+/* ---------- How it works ---------- */
+.how {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+
+.step-list {
+  list-style: none;
+  margin: 40px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.step {
+  background: var(--paper-raised);
+  border-radius: 6px;
+  padding: 28px;
+}
+
+.step-number {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--paper);
+  background: var(--fern);
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  border-radius: 50%;
+  margin-bottom: 16px;
+}
+
+/* ---------- Features ---------- */
+.features {
+  padding-top: 32px;
+  padding-bottom: 64px;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.feature-row-reverse .feature-text {
+  order: 2;
+}
+
+.feature-img {
+  border-radius: 6px;
+}
+
+.tip-widget {
+  margin-top: 40px;
+  background: var(--fern-dark);
+  color: var(--paper);
+  padding: 32px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.tip-widget h3 {
+  color: var(--paper);
+}
+
+.tip-text {
+  min-height: 3.2em;
+  font-size: 1.05rem;
+}
+
+.tip-widget .button-primary {
+  background: var(--sunbeam);
+  color: var(--ink);
+}
+
+.tip-widget .button-primary:hover {
+  background: #d9a838;
+}
+
+/* ---------- Waitlist ---------- */
+.waitlist {
+  padding-top: 32px;
+  padding-bottom: 80px;
+}
+
+.waitlist-inner {
+  background: var(--paper-raised);
+  border-radius: 8px;
+  padding: 48px;
+  max-width: 640px;
+}
+
+.waitlist-form {
+  margin-top: 24px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.form-row label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.form-row input {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--paper);
+}
+
+.form-row input:focus {
+  outline: 2px solid var(--fern);
+  outline-offset: 1px;
+}
+
+.form-status {
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--fern-dark);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+}
+
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-nav a {
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 760px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 16px 24px;
+    gap: 16px;
+  }
+
+  .primary-nav.is-open {
+    display: flex;
+  }
+
+  .site-header {
+    position: relative;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 40px;
+  }
+
+  .hero-art {
+    order: -1;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .step-list {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-row,
+  .feature-row-reverse .feature-text {
+    grid-template-columns: 1fr;
+    order: 0;
+  }
+
+  .feature-row {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-inner {
+    padding: 28px;
+  }
+}
